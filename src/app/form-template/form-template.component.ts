@@ -1,5 +1,5 @@
+import { ConsultaCepService } from './../shared/services/consulta-cep.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -25,9 +25,7 @@ export class FormTemplateComponent implements OnInit {
     }
   };
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private consultaCepService: ConsultaCepService) { }
 
   ngOnInit() {
   }
@@ -37,7 +35,6 @@ export class FormTemplateComponent implements OnInit {
   }
 
   onCepBlur(): void {
-
     let cep = this.form.form.get("endereco.cep").value
     if(cep) {
       cep = cep.replace(/\D/g, "");
@@ -47,7 +44,7 @@ export class FormTemplateComponent implements OnInit {
       return;
     }
 
-    this.http.get(`//viacep.com.br/ws/${cep}/json/`).subscribe( (res: any) => {
+    this.consultaCepService.consultaCep(cep).subscribe( (res: any) => {
       this.form.form.patchValue({
         endereco: {
           rua: res.logradouro,
@@ -57,5 +54,6 @@ export class FormTemplateComponent implements OnInit {
         }
       });
     });
+    
   }
 }

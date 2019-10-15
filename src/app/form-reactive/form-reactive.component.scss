@@ -5,3 +5,9 @@
 .border-dark {
     border-color: #212529
 }
+
+select[readonly] {
+    background: #e9ecef; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+    pointer-events: none;
+    touch-action: none;
+}
