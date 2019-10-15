@@ -1,4 +1,4 @@
-export class EstadoBr {
+export interface EstadoBr {
     nome: string;
     sigla: string;
 }

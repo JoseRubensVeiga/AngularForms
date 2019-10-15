@@ -65,8 +65,21 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label>Cargo </label>
+                <select class="form-control" formControlName="cargo" [compareWith]="compararCargos">
+                    <option *ngFor="let cargo of cargos | async" [ngValue]="cargo">{{ cargo.descricao }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tecnologias </label>
+                <select multiple class="form-control" formControlName="tecnologias">
+                    <option *ngFor="let tecnologia of tecnologias | async" [value]="tecnologia">{{ tecnologia.nome }}</option>
+                </select>
+            </div>
             <button type="reset" class="btn btn-outline-warning mr-2">Limpar</button>
             <button type="submit" class="btn btn-primary mx-2" (click)="onSubmit()">Enviar</button>
+            <button type="submit" class="btn btn-primary mx-2" (click)="setarCargo()">Setar Pleno</button>
         </form>
     </div>
 </div>

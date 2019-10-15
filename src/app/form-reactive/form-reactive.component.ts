@@ -1,3 +1,5 @@
+import { ConsultaTecnologiasService } from './../shared/services/consulta-tecnologias.service';
+import { ConsultaCargosService } from './../shared/services/consulta-cargos.service';
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl } from '@angular/forms';
@@ -6,6 +8,8 @@ import { ConsultaEstadosService } from './../shared/services/consulta-estados.se
 import { ConsultaCepService } from './../shared/services/consulta-cep.service';
 import { Observable } from 'rxjs';
 import { EstadoBr } from '../shared/models/estado-br';
+import { Cargo } from '../shared/models/cargo';
+import { Tecnologia } from '../shared/models/tecnologia';
 
 @Component({
   selector: 'app-form-reactive',
@@ -25,18 +29,26 @@ export class FormReactiveComponent implements OnInit {
       bairro: new FormControl(null),
       cidade: new FormControl(null),
       estado: new FormControl(null)
-    })
+    }),
+    cargo: new FormControl(null),
+    tecnologias: new FormControl(null)
   });
 
   estadosBr: Observable<EstadoBr[]>;
+  cargos: Observable<Cargo[]>;
+  tecnologias: Observable<Tecnologia[]>;
 
   constructor(
     private consultaCepService: ConsultaCepService,
-    private consultaEstadosService: ConsultaEstadosService
+    private consultaEstadosService: ConsultaEstadosService,
+    private consultaCargosService: ConsultaCargosService,
+    private consultaTecnologiasService: ConsultaTecnologiasService
   ) { }
 
   ngOnInit() {
     this.estadosBr = this.consultaEstadosService.getEstados();
+    this.cargos = this.consultaCargosService.getCargos();
+    this.tecnologias = this.consultaTecnologiasService.getTecnologias();
   }
 
   onSubmit() {
@@ -62,6 +74,27 @@ export class FormReactiveComponent implements OnInit {
         }
       });
     });
+  }
+
+  setarCargo() {
+    const cargo = {nome: "Desenvolvedor", nivel: 'Pleno', descricao: 'Desenvolvedor Pleno PHP'};
+    this.formGroup.patchValue({
+      cargo: cargo
+    });
+  }
+
+  compararCargos(cargo1: Cargo, cargo2: Cargo) {
+    if(!cargo1 || !cargo2) {
+      return false;
+    }
+    if(
+      cargo1.nome === cargo2.nome &&
+      cargo1.nivel === cargo1.nivel &&
+      cargo1.descricao === cargo1.descricao
+    ) {
+      return true;
+    }
+    return false;
   }
 
 }
