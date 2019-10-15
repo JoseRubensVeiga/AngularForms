@@ -1,0 +1,12 @@
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand text-white" href="#">App Forms</a>
+
+    <ul class="navbar-nav mr-auto flex-row">
+      <li class="nav-item" *ngFor="let item of navbarItems" [ngClass]="{active: ! isRouteActived(item.url)}">
+        <a class="nav-link" [routerLink]="[item.url]">{{ item.label }}</a>
+      </li>
+    </ul>
+</nav>
+<div class="container-fluid p-4">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Nome <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngClass]="{'is-invalid': ! nome.valid && nome.touched, 'is-valid': nome.valid && nome.touched}" name="nome" [(ngModel)]="usuario.nome" required #nome="ngModel" >
+                <small *ngIf="! nome.valid" class="invalid-feedback">
+                    O nome é obrigatório.
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" [ngClass]="{'is-invalid': ! email.valid && email.touched, 'is-valid': email.valid && email.touched}" name="email" [(ngModel)]="usuario.email" required email #email="ngModel">
+                <small *ngIf="! email.valid" class="invalid-feedback">
+                    O E-mail é obrigatório.
+                </small>
+            </div>
+            <ng-container ngModelGroup="endereco">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>CEP <span class="text-danger">*</span></label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                [ngClass]="{'is-invalid': ! cep.valid && cep.touched, 'is-valid': cep.valid && cep.touched}"
+                                [(ngModel)]="usuario.endereco.cep"
+                                name="cep"
+                                required
+                                cep
+                                #cep="ngModel"
+                                (blur)="onCepBlur()">
+                            <small *ngIf="! cep.valid" class="invalid-feedback">
+                                O CEP é obrigatório.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>Número <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" [ngClass]="{'is-invalid': ! numero.valid && numero.touched, 'is-valid': numero.valid && numero.touched}" name="numero" [(ngModel)]="usuario.endereco.numero" required numero #numero="ngModel">
+                            <small *ngIf="! numero.valid" class="invalid-feedback">
+                                O Número está inválido
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label>Complemento</label>
+                            <input type="text" class="form-control" name="complemento" [(ngModel)]="usuario.endereco.complemento" complemento #complemento="ngModel">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Rua <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" readonly name="rua" [(ngModel)]="usuario.endereco.rua" rua #rua="ngModel">
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Bairro <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" readonly name="bairro" [(ngModel)]="usuario.endereco.bairro" bairro #bairro="ngModel">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Cidade <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" readonly name="cidade" [(ngModel)]="usuario.endereco.cidade" cidade #cidade="ngModel">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="form-group">
+                            <label>Estado <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" readonly name="estado" [(ngModel)]="usuario.endereco.estado" estado #estado="ngModel">
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="! form.valid">Enviar</button>
+        </form>
+    </div>
+</div>

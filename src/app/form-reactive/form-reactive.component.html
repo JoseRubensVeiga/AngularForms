@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+        <div class="col-md-7">
+            <h1 class="display-3 text-center mb-0 pb-0">Formulário</h1>
+            <hr class="w-25 text-center border-dark border-2 mt-0 pt-0">
+            <form [formGroup]="formGroup">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Nome <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control is-invalid" required formControlName="nome">
+                            <div class="invalid-feedback">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" required formControlName="email">
+                        </div>
+                    </div>
+                </div>
+                <div formGroupName="endereco">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>CEP <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" required formControlName="cep">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Número <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" required formControlName="numero">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label>Complemento</label>
+                                <input type="text" class="form-control" formControlName="complemento">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Rua <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" readonly  formControlName="rua">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Bairro <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" readonly  formControlName="bairro">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Cidade <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" readonly  formControlName="cidade">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Estado <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" readonly  formControlName="estado">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="reset" class="btn btn-outline-warning mr-2">Limpar</button>
+                <button type="submit" class="btn btn-primary mx-2" (click)="onSubmit()">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4 bg-dark">
+        <div class="col-md-6">
+            <pre class="text-white">{{ formGroup.value | json }}</pre>
+        </div>
+    </div>
