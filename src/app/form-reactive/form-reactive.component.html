@@ -65,17 +65,46 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Cargo </label>
-                <select class="form-control" formControlName="cargo" [compareWith]="compararCargos">
-                    <option *ngFor="let cargo of cargos | async" [ngValue]="cargo">{{ cargo.descricao }}</option>
-                </select>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Cargo </label>
+                        <select class="form-control" formControlName="cargo" [compareWith]="compararCargos">
+                            <option *ngFor="let cargo of cargos | async" [ngValue]="cargo">{{ cargo.descricao }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tecnologias </label>
+                        <select multiple class="form-control" formControlName="tecnologias">
+                            <option *ngFor="let tecnologia of tecnologias | async" [value]="tecnologia">{{ tecnologia.nome }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Inscrever-se na Newsletter? </label>
+                        <div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="nl-s" value="s" formControlName="newsletter" class="custom-control-input">
+                                <label class="custom-control-label" for="nl-s">Sim</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="nl-n" value="n" formControlName="newsletter" class="custom-control-input">
+                                <label class="custom-control-label" for="nl-n">Não</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Tecnologias </label>
-                <select multiple class="form-control" formControlName="tecnologias">
-                    <option *ngFor="let tecnologia of tecnologias | async" [value]="tecnologia">{{ tecnologia.nome }}</option>
-                </select>
+            <div class="row">
+                <div class="col">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="termos" formControlName="termos" >
+                        <label class="custom-control-label" for="termos">Aceito os <a href="#">Termos de Privacidade</a>.</label>
+                    </div>
+                </div>
             </div>
             <button type="reset" class="btn btn-outline-warning mr-2">Limpar</button>
             <button type="submit" class="btn btn-primary mx-2" (click)="onSubmit()">Enviar</button>

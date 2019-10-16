@@ -1,12 +1,12 @@
-import { ConsultaTecnologiasService } from './../shared/services/consulta-tecnologias.service';
-import { ConsultaCargosService } from './../shared/services/consulta-cargos.service';
 import { Component, OnInit } from '@angular/core';
-
-import { FormGroup, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ConsultaEstadosService } from './../shared/services/consulta-estados.service';
 import { ConsultaCepService } from './../shared/services/consulta-cep.service';
-import { Observable } from 'rxjs';
+import { ConsultaTecnologiasService } from './../shared/services/consulta-tecnologias.service';
+import { ConsultaCargosService } from './../shared/services/consulta-cargos.service';
+
 import { EstadoBr } from '../shared/models/estado-br';
 import { Cargo } from '../shared/models/cargo';
 import { Tecnologia } from '../shared/models/tecnologia';
@@ -31,7 +31,9 @@ export class FormReactiveComponent implements OnInit {
       estado: new FormControl(null)
     }),
     cargo: new FormControl(null),
-    tecnologias: new FormControl(null)
+    tecnologias: new FormControl(null),
+    newsletter: new FormControl('s'),
+    termos: new FormControl(null, Validators.pattern('true'))
   });
 
   estadosBr: Observable<EstadoBr[]>;
